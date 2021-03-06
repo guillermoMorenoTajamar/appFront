@@ -15,10 +15,10 @@ export default function MainView(props) {
   const [toDoItems, setToDoItems] = useState(testData);
   const [selectedItem, setEditItem] = useState({ id: -1, description: "", done: false });
 
-  //const serverUrl = "http://todo-app-server.azurewebsites.net/Todoitem";
+  //const serverUrl = "https://todo-app-server.azurewebsites.net/Todoitem";
   
   useEffect(() => {
-    fetch('http://todo-app-server.azurewebsites.net/Todoitem')
+    fetch('https://todo-app-server.azurewebsites.net/Todoitem')
       .then(res => res.json())
       .then(
         (result) => {
@@ -47,7 +47,7 @@ export default function MainView(props) {
 
     const requestOptions = CreateRequestOptions('DELETE');
 
-    fetch("http://todo-app-server.azurewebsites.net/Todoitem/" + id, requestOptions)
+    fetch("https://todo-app-server.azurewebsites.net/Todoitem/" + id, requestOptions)
       .then(() => {
         setToDoItems(toDoItems.filter(item => item.id !== id))
       });
@@ -62,7 +62,7 @@ export default function MainView(props) {
 
     const requestOptions = CreateRequestOptions('PUT', tempItem);
 
-    fetch("http://todo-app-server.azurewebsites.net/Todoitem/" + id, requestOptions)
+    fetch("https://todo-app-server.azurewebsites.net/Todoitem/" + id, requestOptions)
       .then(() => {
         setToDoItems(toDoItems.map(item => item.id === id ? tempItem : item))
       });
@@ -88,7 +88,7 @@ export default function MainView(props) {
 
   const createNewIten = (item) => {
     const requestOptions = CreateRequestOptions('POST', item);
-    fetch("http://todo-app-server.azurewebsites.net/Todoitem", requestOptions)
+    fetch("https://todo-app-server.azurewebsites.net/Todoitem", requestOptions)
       .then(response => response.json())
       .then(data => {
         item.id = data.id;
@@ -98,7 +98,7 @@ export default function MainView(props) {
 
   const updateIten = (item) => {
     const requestOptions = CreateRequestOptions('PUT', item);
-    fetch("http://todo-app-server.azurewebsites.net/Todoitem/" + item.id, requestOptions)
+    fetch("https://todo-app-server.azurewebsites.net/Todoitem/" + item.id, requestOptions)
       .then(() => {
         setToDoItems(toDoItems.map((element) => {
           return (element.id === item.id) ? item : element;
