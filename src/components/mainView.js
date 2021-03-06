@@ -15,7 +15,7 @@ export default function MainView(props) {
   const [toDoItems, setToDoItems] = useState(testData);
   const [selectedItem, setEditItem] = useState({ id: -1, description: "", done: false });
 
-  const serverUrl = "http://todo-app-server.azurewebsites.net/Todoitem";
+  //const serverUrl = "http://todo-app-server.azurewebsites.net/Todoitem";
   
   useEffect(() => {
     fetch('http://todo-app-server.azurewebsites.net/Todoitem')
