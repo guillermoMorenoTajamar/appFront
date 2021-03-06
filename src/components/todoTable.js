@@ -28,8 +28,7 @@ export default function TodoTable(props) {
 
   const drawTable = () => {
     return (
-      <div className="card">
-        <table className="table table-striped">
+      <table className="table table-striped m-1">
           <thead>
             <tr>
               <th>Description</th>
@@ -52,7 +51,6 @@ export default function TodoTable(props) {
             }
           </tbody>
         </table>
-      </div>
     )
   }
 

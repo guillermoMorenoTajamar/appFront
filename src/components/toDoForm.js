@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 
 export default function TodoForm(props) {
-  const [editItem, setToDoItem] = useState(props.editItem);
+  const [selectedItem, setToDoItem] = useState(props.selectedItem);
 
   useEffect(() => {
-    setToDoItem(props.editItem);
+    setToDoItem(props.selectedItem);
   }, [props])
 
   const clearForm = () => {
@@ -14,9 +14,9 @@ export default function TodoForm(props) {
 
   const drawForm = () => {
     return (
-      <div className="card">
+      <div className="card m-1 hidden=true">
         <div className="card-header text-center">
-          {editItem.id === -1 ? "New" : "Edit" } To Do
+          {selectedItem.id === -1 ? "New" : "Edit" } To Do
         </div>
         <div className="card-body">
           <form>
@@ -25,9 +25,9 @@ export default function TodoForm(props) {
               <input
                 name="description"
                 className="form-control"
-                value={editItem.description}
+                value={selectedItem.description}
                 onChange={(event) => {
-                  setToDoItem({ ...editItem, description: event.target.value })
+                  setToDoItem({ ...selectedItem, description: event.target.value })
                 }}
               />
             </div>
@@ -36,9 +36,9 @@ export default function TodoForm(props) {
                 name="done"
                 className="form-check-input"
                 type="checkbox"
-                checked={editItem.done}
+                checked={selectedItem.done}
                 onChange={(event) => {
-                  setToDoItem({ ...editItem, done: !editItem.done })
+                  setToDoItem({ ...selectedItem, done: !selectedItem.done })
                 }}
               />
               <label>Done</label>
@@ -49,13 +49,13 @@ export default function TodoForm(props) {
               className="btn btn-primary"
               onClick={() => {
                 props.createToDoCallback({
-                  id: editItem.id,
-                  description: editItem.description,
-                  done: editItem.done
+                  id: selectedItem.id,
+                  description: selectedItem.description,
+                  done: selectedItem.done
                 });
               }}
             >
-             {editItem.id === -1 ? "Create" : "Save" }
+             {selectedItem.id === -1 ? "Create" : "Save" }
             </button>
             <button
               type="button"
@@ -70,6 +70,8 @@ export default function TodoForm(props) {
       </div>
     )
   }
-
-  return drawForm();
+  if (props.hideForm)
+    return null;
+  else
+    return drawForm();
 }
